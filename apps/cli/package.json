@@ -5,7 +5,6 @@
   "private": true,
   "author": "Olavo Amorim Santos<olavo.santos@micra.dev>",
   "license": "MIT",
-  "type": "module",
   "main": "./index.mjs",
   "bin": {
     "assistant": "./index.mjs"
