@@ -1,4 +1,4 @@
-import type {NodeRequestInfo, NodeRequestInit} from '@/types/fetch';
+import type {NodeRequestInfo, NodeRequestInit} from '../../types/fetch';
 import {
   Headers as WebHeaders,
   Request as WebRequest,

@@ -1,4 +1,4 @@
-import type {NodeRequestInfo, NodeRequestInit} from '@/types/fetch';
+import type {NodeRequestInfo, NodeRequestInit} from '../../types/fetch';
 import {fetch as webFetch} from '@remix-run/web-fetch';
 
 export const fetch: typeof webFetch = (

@@ -3,6 +3,7 @@
   "compilerOptions": {
     "declaration": true,
     "emitDeclarationOnly": true,
+    "skipLibCheck": true,
     "module": "esnext",
     "types": ["vitest/globals"],
     "baseUrl": ".",
