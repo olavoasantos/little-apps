@@ -1,14 +1,14 @@
 import {Headers as WebHeaders} from '@remix-run/web-fetch';
-import {NodeRequest} from '@/data/classes/NodeRequest';
-import {NodeResponse} from '@/data/classes/NodeResponse';
-import {fetch} from '@/data/classes/fetch';
+import {NodeRequest} from './data/classes/NodeRequest';
+import {NodeResponse} from './data/classes/NodeResponse';
+import {fetch} from './data/classes/fetch';
 
 export type {
   NodeHeadersInit as HeadersInit,
   NodeRequestInfo as RequestInfo,
   NodeRequestInit as RequestInit,
   NodeResponseInit as ResponseInit,
-} from '@/types/fetch';
+} from './types/fetch';
 export {FormData} from '@remix-run/web-fetch';
 export {Blob, File} from '@remix-run/web-file';
 export {

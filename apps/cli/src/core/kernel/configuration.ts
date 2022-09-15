@@ -1,3 +1,3 @@
-export const configuration: Application.ModuleConfiguration = {
+export const configuration: Application.CliKernelConfiguration = {
   //
 };
