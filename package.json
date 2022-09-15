@@ -4,8 +4,8 @@
   "scripts": {
     "build": "turbo run build",
     "dev": "turbo run dev --parallel",
-    "format": "prettier --write \"**/*.{ts,tsx}\"",
-    "lint": "eslint **/*.{ts,tsx}",
+    "format": "prettier --write '**/*.{ts,tsx}'",
+    "lint": "eslint '**/*.{ts,tsx}'",
     "prepare": "husky install .config/husky",
     "test:coverage": "turbo run test:coverage --parallel",
     "test": "turbo run test --parallel"
