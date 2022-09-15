@@ -1,0 +1,39 @@
+{
+  "name": "@little-apps/request-handler",
+  "version": "0.0.1",
+  "description": "Micra's request handler manager",
+  "private": true,
+  "author": "Olavo Amorim Santos<olavo.santos@micra.dev>",
+  "license": "MIT",
+  "scripts": {
+    "build:code": "pnpm clean:code && vite build --config .viterc.ts",
+    "build:types": "tsc -p tsconfig.types.json && tsc-alias --silent -p tsconfig.types.json --dir .",
+    "build": "concurrently 'pnpm:build:*'",
+    "clean:code": "find -E ./data -regex '.*\\.(js|mjs)' -delete & find -E ./ -regex '.*(configuration|index|ServiceProvider)\\.(js|mjs)' -delete",
+    "clean:types": "find -E ./data -regex '.*\\.(d.ts)' -delete & find -E ./ -regex '.*(configuration|index|ServiceProvider)\\.(d.ts)' -delete",
+    "clean": "concurrently 'pnpm:clean:*'",
+    "dev:code": "nodemon --ext 'ts,tsx' --ignore '*.d.ts' --exec 'pnpm build:code'",
+    "dev:types": "nodemon --ext 'ts,tsx' --ignore '*.d.ts' --exec 'pnpm build:types'",
+    "dev": "concurrently 'pnpm:dev:*'",
+    "test:coverage": "vitest run --coverage --config .viterc.ts",
+    "test:dev": "vitest --config .viterc.ts",
+    "test": "vitest run --config .viterc.ts"
+  },
+  "devDependencies": {
+    "@micra/core": "next",
+    "@micra/faker": "next",
+    "@micra/typescript-config": "next",
+    "@micra/vite-config": "next",
+    "@vitest/coverage-c8": "^0.23.1",
+    "c8": "^7.11.0",
+    "concurrently": "^7.3.0",
+    "nodemon": "^2.0.19",
+    "tsc-alias": "^1.6.4",
+    "typescript": "^4.6.2",
+    "vite": "^3.1.0",
+    "vitest": "^0.23.1"
+  },
+  "dependencies": {
+    "@micra/error": "next"
+  }
+}
