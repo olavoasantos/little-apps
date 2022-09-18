@@ -1,17 +1,18 @@
 {
-  "name": "@little-apps/cli",
+  "name": "@applet.land/<%= _.kebabCase(name) %>",
   "version": "0.0.1",
-  "description": "Little apps CLI",
+  "description": "<%= _.capitalize(description) %>",
   "private": true,
   "author": "Olavo Amorim Santos<olavo.santos@micra.dev>",
   "license": "MIT",
-  "main": "./index.mjs",
-  "bin": {
-    "assistant": "./index.mjs"
-  },
   "scripts": {
+    "build:code": "pnpm clean:code && vite build --config .viterc.ts",
     "build:types": "tsc -p tsconfig.types.json && tsc-alias --silent -p tsconfig.types.json --dir .",
     "build": "concurrently 'pnpm:build:*'",
+    "clean:code": "find -E ./data -regex '.*\\.(js|mjs)' -delete & find -E ./ -regex '.*(configuration|index|ServiceProvider)\\.(js|mjs)' -delete",
+    "clean:types": "find -E ./data -regex '.*\\.(d.ts)' -delete & find -E ./ -regex '.*(configuration|index|ServiceProvider)\\.(d.ts)' -delete",
+    "clean": "concurrently 'pnpm:clean:*'",
+    "dev:code": "nodemon --ext 'ts,tsx' --ignore '*.d.ts' --exec 'pnpm build:code'",
     "dev:types": "nodemon --ext 'ts,tsx' --ignore '*.d.ts' --exec 'pnpm build:types'",
     "dev": "concurrently 'pnpm:dev:*'",
     "test:coverage": "vitest run --coverage --config .viterc.ts",
@@ -23,16 +24,9 @@
     "@micra/faker": "next",
     "@micra/typescript-config": "next",
     "@micra/vite-config": "next",
-    "@types/ejs": "^3.1.1",
-    "@types/fs-extra": "^9.0.13",
-    "@types/inquirer": "^9.0.1",
-    "@types/lodash": "^4.14.185",
-    "@types/pluralize": "^0.0.29",
-    "@types/prettier": "^2.7.0",
     "@vitest/coverage-c8": "^0.23.1",
     "c8": "^7.11.0",
     "concurrently": "^7.3.0",
-    "eslint": "^8.23.0",
     "nodemon": "^2.0.19",
     "tsc-alias": "^1.6.4",
     "typescript": "^4.6.2",
@@ -40,19 +34,6 @@
     "vitest": "^0.23.1"
   },
   "dependencies": {
-    "@little-apps/polyfills": "*",
-    "@little-apps/request-handler": "*",
-    "@micra/application": "next",
-    "@micra/error": "next",
-    "@micra/eslint-config": "next",
-    "@micra/router": "next",
-    "ejs": "^3.1.8",
-    "fast-glob": "^3.2.12",
-    "fs-extra": "^10.1.0",
-    "inquirer": "^9.1.1",
-    "lodash": "^4.17.21",
-    "pluralize": "^8.0.0",
-    "prettier": "^2.7.1",
-    "vite-node": "^0.23.2"
+    "@micra/error": "next"
   }
 }
