@@ -1,3 +1,4 @@
+#!/usr/bin/env zx
 import app from '@micra/application';
 import * as RequestHandler from '@little-apps/request-handler';
 import * as Kernel from './core/kernel';

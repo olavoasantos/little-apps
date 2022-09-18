@@ -19,13 +19,21 @@ export {
 };
 
 export function registerGlobalFetch() {
-  if (!globalThis.fetch) {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const self = globalThis as any;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const self = globalThis as any;
+  if (!self.fetch) {
     self.fetch = fetch;
+  }
+  if (!self.Headers) {
     self.Headers = WebHeaders;
+  }
+  if (!self.Request) {
     self.Request = NodeRequest;
+  }
+  if (!self.Response) {
     self.Response = NodeResponse;
+  }
+  if (!self.AbortController) {
     self.AbortController = AbortController;
   }
 }
