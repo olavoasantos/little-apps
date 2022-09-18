@@ -3,13 +3,11 @@
   "compilerOptions": {
     "declaration": true,
     "emitDeclarationOnly": true,
-    "skipLibCheck": true,
-    "module": "esnext",
     "types": ["vitest/globals"],
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["*"]
     }
   },
-  "include": ["**/*.ts", "**/*.tsx", "**/*.d.ts", "index.js"]
+  "include": ["**/*.ts", "**/*.tsx", "register.d.ts"]
 }
