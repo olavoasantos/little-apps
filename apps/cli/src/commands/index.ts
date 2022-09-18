@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import * as prettierOptions from '@micra/eslint-config/prettier';
 import {
   pathExistsSync,
