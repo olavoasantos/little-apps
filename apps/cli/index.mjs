@@ -1,4 +1,3 @@
-#!/usr/bin/env node
 function millisecondsToStr(milliseconds) {
   function numberEnding(number) {
     return number > 1 ? 's' : '';

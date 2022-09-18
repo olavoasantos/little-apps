@@ -1,3 +1,5 @@
+import {$} from 'zx';
+import changelog from 'generate-changelog';
 import inquirer from 'inquirer';
 import {pathExistsSync, readdirSync} from 'fs-extra';
 import {join} from 'path';
@@ -11,6 +13,30 @@ const getDirectories = (source: string) =>
   readdirSync(source, {withFileTypes: true})
     .filter((dirent) => dirent.isDirectory())
     .map((dirent) => dirent.name);
+
+router.command('sprint', async ({}) => {
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
+  const pkg = require(cwd('package.json'));
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
+  const sprints = require(cwd('.config/sprints/sprint.json'));
+
+  const fromTag = pkg.version !== '0.0.0' ? pkg.version : undefined;
+  let changes = await changelog.generate({
+    repoUrl: pkg.repository,
+    tag: fromTag,
+  });
+
+  const currentSprint = sprints.names[sprints.active];
+  await $`npm version premajor --preid=${currentSprint} --allow-same-version`;
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
+  const newPkg = require(cwd('package.json'));
+  changes = changes.replace(
+    `#### ${fromTag ?? '0.0.0'}`,
+    `#### ${newPkg.version}`,
+  );
+
+  use('print').debug(changes);
+});
 
 router
   .command('make\\:module', async ({use, options, arguments: args}) => {
