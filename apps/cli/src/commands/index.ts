@@ -1,8 +1,16 @@
-import {$} from 'zx';
+import * as prettierOptions from '@micra/eslint-config/prettier';
+import {
+  pathExistsSync,
+  readdirSync,
+  readFileSync,
+  writeFileSync,
+} from 'fs-extra';
 import changelog from 'generate-changelog';
 import inquirer from 'inquirer';
-import {pathExistsSync, readdirSync} from 'fs-extra';
 import {join} from 'path';
+import prettier from 'prettier';
+import {$} from 'zx';
+
 export const router = use('router');
 
 export function cwd(...paths: string[]) {
@@ -14,28 +22,44 @@ const getDirectories = (source: string) =>
     .filter((dirent) => dirent.isDirectory())
     .map((dirent) => dirent.name);
 
-router.command('sprint', async ({}) => {
+router.command('sprint:close', async ({}) => {
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const pkg = require(cwd('package.json'));
   // eslint-disable-next-line @typescript-eslint/no-var-requires
-  const sprints = require(cwd('.config/sprints/sprint.json'));
-
-  const fromTag = pkg.version !== '0.0.0' ? pkg.version : undefined;
+  const sprints = require(cwd('.config/sprints/config.json'));
   let changes = await changelog.generate({
     repoUrl: pkg.repository,
-    tag: fromTag,
+    major: true,
+    exclude: ['wip', 'sprint'],
   });
 
   const currentSprint = sprints.names[sprints.active];
-  await $`npm version premajor --preid=${currentSprint} --allow-same-version`;
-  // eslint-disable-next-line @typescript-eslint/no-var-requires
-  const newPkg = require(cwd('package.json'));
-  changes = changes.replace(
-    `#### ${fromTag ?? '0.0.0'}`,
-    `#### ${newPkg.version}`,
+  const result =
+    await $`npm version premajor --preid=${currentSprint} --allow-same-version`;
+  changes = changes.replace(/^## (.*) \(/i, `## ${String(result).trim()} (`);
+
+  const CHANGELOG = readFileSync(cwd('CHANGELOG.md'), 'utf-8');
+  writeFileSync(
+    cwd('CHANGELOG.md'),
+    prettier.format(
+      CHANGELOG.replace('# Changelog\n', '# Changelog\n' + changes),
+      {
+        ...(prettierOptions as any),
+        parser: 'markdown',
+      },
+    ),
   );
 
-  use('print').debug(changes);
+  sprints.active += 1;
+  writeFileSync(
+    cwd('.config/sprints/config.json'),
+    prettier.format(JSON.stringify(sprints), {
+      ...(prettierOptions as any),
+      parser: 'json',
+    }),
+  );
+
+  await $`git add . && git commit -m "sprint: updated changelog and sprint config"`;
 });
 
 router
