@@ -55,6 +55,7 @@
     "lodash": "^4.17.21",
     "pluralize": "^8.0.0",
     "prettier": "^2.7.1",
+    "type-fest": "^2.19.0",
     "vite-node": "^0.23.2",
     "zx": "^7.0.8"
   }
