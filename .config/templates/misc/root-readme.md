@@ -4,22 +4,21 @@
 
 ## About
 
-A collection of small apps.
+<%= description %>
 
 ## What's in the box?
 
 ### Apps
 
-* [cli](./apps/cli)
+<%= apps.map(app => `* [${app}](./apps/${app})`).join('\n') %>
 
 ### Packages
 
-* [polyfills](./packages/polyfills)
-* [request-handler](./packages/request-handler)
+<%= packages.map(package => `* [${package}](./packages/${package})`).join('\n') %>
 
 ## Developing
 
-- [Current Sprint: Hydrogen](https://github.com/users/olavoasantos/projects/2/views/2);
+- [Current Sprint: <%= sprint %>](https://github.com/users/olavoasantos/projects/2/views/2);
 
 ### Setup
 

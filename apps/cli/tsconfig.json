@@ -8,8 +8,8 @@
     "types": ["vitest/globals"],
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"]
+      "~/*": ["./*"]
     }
   },
-  "include": ["**/*.ts", "**/*.tsx", "**/*.d.ts", "index.js"]
+  "include": ["**/*.ts", "**/*.tsx", "**/*.d.ts"]
 }

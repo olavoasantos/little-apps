@@ -53,7 +53,7 @@ import * as url from 'url';
   const server = await createServer({
     resolve: {
       alias: {
-        '@': join(__dirname, 'src'),
+        '~': join(__dirname),
       },
     },
     optimizeDeps: {
@@ -73,6 +73,6 @@ import * as url from 'url';
       return node.resolveId(id, importer);
     },
   });
-  await runner.executeFile(join(__dirname, './src/index.cli.ts'));
+  await runner.executeFile(join(__dirname, './index.cli.ts'));
   await server.close();
 })();
