@@ -22,13 +22,23 @@ export class CliRouteBuilder<
     return this;
   }
 
-  arguments(...args: CliArgument[]): this {
-    this.route.arguments.push(...args);
+  arguments(...args: (CliArgument | CliArgument[])[]): this {
+    this.route.arguments.push(
+      ...args.reduce<CliArgument[]>((list, arg) => {
+        list.push(...(Array.isArray(arg) ? arg : [arg]));
+        return list;
+      }, []),
+    );
     return this;
   }
 
-  options(...args: CliOption[]): this {
-    this.route.options.push(...args);
+  options(...options: (CliOption | CliOption[])[]): this {
+    this.route.options.push(
+      ...options.reduce<CliOption[]>((list, option) => {
+        list.push(...(Array.isArray(option) ? option : [option]));
+        return list;
+      }, []),
+    );
     return this;
   }
 }

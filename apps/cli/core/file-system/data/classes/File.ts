@@ -1,6 +1,6 @@
 import glob from 'fast-glob';
 import prettier, {type Options} from 'prettier';
-import * as prettierOptions from '@micra/eslint-config/prettier';
+import {default as prettierOptions} from '@micra/eslint-config/prettier';
 import {
   pathExistsSync,
   unlinkSync,

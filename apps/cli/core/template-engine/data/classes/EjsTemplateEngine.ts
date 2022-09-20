@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import {default as prettierOptions} from '@micra/eslint-config/prettier';
 import ejs from 'ejs';
 import fg from 'fast-glob';
 import {lstatSync, outputFileSync, readFileSync} from 'fs-extra';
 import {join} from 'path';
 import prettier from 'prettier';
-import * as prettierOptions from '@micra/eslint-config/prettier';
 import type {TemplateEngine} from '../../types';
 import {_} from '../utilities/template-context';
 
