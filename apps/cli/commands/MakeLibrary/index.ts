@@ -39,7 +39,7 @@ export const command: Micra.RouteHandler = async ({use, options}) => {
   }
 
   // Get description
-  const {description} = options.name
+  const {description} = options.description
     ? options
     : await inquirer.prompt({
         type: 'input',
