@@ -1,10 +1,35 @@
 {
-  "name": "@applet.land/<%= _.kebabCase(name) %>",
+  "name": "@little-apps<%= _.kebabCase(name) %>",
   "version": "0.0.1",
   "description": "<%= _.capitalize(description) %>",
   "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/olavoasantos/little-apps.git"
+  },
   "author": "Olavo Amorim Santos<olavo.santos@micra.dev>",
+  "bugs": {
+    "url": "https://github.com/olavoasantos/little-apps/issues?q=is:issue+is:open+label:%22Type:+fix%22"
+  },
   "license": "MIT",
+  "exports": {
+    ".": {
+      "import": "./index.mjs",
+      "require": "./index.js",
+      "types": "./index.d.ts"
+    },
+    "./*": "./*",
+    "./ServiceProvider": {
+      "import": "./ServiceProvider.mjs",
+      "require": "./ServiceProvider.js",
+      "types": "./ServiceProvider.d.ts"
+    },
+    "./configuration": {
+      "import": "./configuration.mjs",
+      "require": "./configuration.js",
+      "types": "./configuration.d.ts"
+    }
+  },
   "scripts": {
     "build:code": "pnpm clean:code && vite build --config .viterc.ts",
     "build:types": "tsc -p tsconfig.types.json && tsc-alias --silent -p tsconfig.types.json --dir .",

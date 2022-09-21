@@ -1,3 +1,4 @@
+import * as MakeLibrary from './MakeLibrary';
 import * as SprintClose from './SprintClose';
 import * as MakeReadme from './MakeReadme';
 import * as MakeModule from './MakeModule';
@@ -48,3 +49,8 @@ router
   .command('sprint\\:close', SprintClose.command)
   .options(SprintClose.options)
   .arguments(SprintClose.args);
+
+router
+  .command('make\\:library', MakeLibrary.command)
+  .options(MakeLibrary.options)
+  .arguments(MakeLibrary.args);
