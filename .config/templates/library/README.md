@@ -2,20 +2,20 @@
   <img src="../../.config/assets/icon.svg" />
 </p>
 
-<h1 align="center">@applet.land/<%= _.kebabCase(name) %></h1>
+<h1 align="center">@little-apps/<%= _.kebabCase(name) %></h1>
 
 ## About
 
-<%= _.capitalize(description) %>
+<%= _.upperFirst(description) %>
 
 ## Consuming the package
 
-Add `@applet.land/<%= _.kebabCase(name) %>` to your project's dependencies.
+Add `@little-apps/<%= _.kebabCase(name) %>` to your project's dependencies.
 
 ```json
 {
   "dependencies": {
-    "@applet.land/<%= _.kebabCase(name) %>": "*"
+    "@little-apps/<%= _.kebabCase(name) %>": "*"
   }
 }
 ```
@@ -23,7 +23,7 @@ Add `@applet.land/<%= _.kebabCase(name) %>` to your project's dependencies.
 After running `pnpm i`, you can import the package in your code.
 
 ```ts
-import {...} from '@applet.land/<%= _.kebabCase(name) %>';
+import {...} from '@little-apps/<%= _.kebabCase(name) %>';
 ```
 
 ## Contributing

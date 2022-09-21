@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import glob from 'fast-glob';
-import {pathExistsSync, lstatSync} from 'fs-extra';
+import {lstatSync} from 'fs-extra';
 import {basename, join} from 'path';
 import type {
   TemplateEngine,
@@ -34,10 +34,6 @@ export class TemplateGroup implements ITemplateGroup {
 
   get path(): string {
     return this.#path;
-  }
-
-  get exists(): boolean {
-    return pathExistsSync(this.#path);
   }
 
   get name(): string {

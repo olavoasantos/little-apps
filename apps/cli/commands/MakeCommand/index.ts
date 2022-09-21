@@ -47,7 +47,7 @@ export const command: Micra.RouteHandler = async ({use, options}) => {
 
   // Update index to export new file
   const exporter = File.find(path.cwd('apps', 'cli', 'commands', 'index.ts'));
-  const importLine = `import * as ${name}Command from './${name}';\n`;
+  const importLine = `import * as ${name} from './${name}';\n`;
   const commandRegistration = `\nrouter.command('${command}', ${name}.command).options(${name}.options).arguments(${name}.args);`;
   if (!exporter.content.includes(importLine)) {
     exporter.prepend(importLine);
