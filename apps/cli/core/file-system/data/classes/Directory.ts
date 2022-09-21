@@ -32,6 +32,10 @@ export class Directory implements IDirectory {
     return lstatSync(path).isDirectory();
   }
 
+  static exists(path: string): boolean {
+    return pathExistsSync(path);
+  }
+
   #path: string;
   #files!: File[];
   #directories!: Directory[];

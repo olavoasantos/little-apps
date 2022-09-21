@@ -11,8 +11,11 @@ import {basename, dirname, extname} from 'path';
 import type {Directory, File as IFile, FileProperties} from '../../types';
 
 export class File implements IFile {
+  static exists(path: string): boolean {
+    return pathExistsSync(path);
+  }
   static find(path: string): File {
-    if (pathExistsSync(path)) {
+    if (File.exists(path)) {
       return new File({path});
     }
 

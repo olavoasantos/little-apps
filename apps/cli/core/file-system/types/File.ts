@@ -24,4 +24,5 @@ export interface StaticFile {
   new (partial?: Partial<FileProperties>): File;
   find(path: string): File;
   findAll(path: string): File[];
+  exists(path: string): boolean;
 }

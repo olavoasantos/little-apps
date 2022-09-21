@@ -21,4 +21,5 @@ export interface StaticDirectory {
   find(path: string): Directory;
   findAll(path: string): Directory[];
   isDirectory(path: string): boolean;
+  exists(path: string): boolean;
 }

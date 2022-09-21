@@ -18,3 +18,5 @@ export interface TemplateEngine {
     options?: Record<string, any>,
   ): void;
 }
+export * from './Template';
+export * from './TemplateGroup';

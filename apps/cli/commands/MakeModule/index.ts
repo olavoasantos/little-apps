@@ -6,8 +6,8 @@ export const args: Application.CliArgument[] = [];
 export const command: Micra.RouteHandler = async ({use, options}) => {
   const path = use('path');
   const print = use('print');
-  const Directory = use('directory');
-  const templateEngine = use('template-engine');
+  const Directory = use('Directory');
+  const TemplateGroup = use('TemplateGroup');
   const apps = Directory.find(path.apps()).directories.map(
     (directory) => directory.name,
   );
@@ -45,8 +45,8 @@ export const command: Micra.RouteHandler = async ({use, options}) => {
         message: 'What name should we use?',
       });
 
-  const newModule = new Directory({path: path.apps(app, 'core', name)});
-  if (newModule.exists) {
+  const destination = path.apps(app, 'core', name);
+  if (Directory.exists(destination)) {
     const response = await inquirer.prompt({
       type: 'confirm',
       name: 'force',
@@ -63,18 +63,11 @@ export const command: Micra.RouteHandler = async ({use, options}) => {
     .info(`Creating the core module ${name} on the ${app} project:`)
     .newLine();
 
-  const ctx = {name, app};
-  const templates = Directory.find(path.templates('module'));
-  templates.allFiles.forEach((template) => {
-    const file = newModule
-      .createFile({
-        content: templateEngine.render(template.content, ctx),
-        path: templateEngine.render(template.pathFrom(templates), ctx),
-      })
-      .save();
-
-    print.success(`Created:`, file.path);
-  });
+  TemplateGroup.find(path.templates('module')).save(
+    destination,
+    {name, app},
+    (path) => print.success(`Created:`, path),
+  );
 
   return new Response();
 };

@@ -11,8 +11,8 @@ declare global {
     }
 
     interface Services {
-      file: StaticFile;
-      directory: StaticDirectory;
+      File: StaticFile;
+      Directory: StaticDirectory;
     }
 
     interface Configurations {

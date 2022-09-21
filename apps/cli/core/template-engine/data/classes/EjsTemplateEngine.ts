@@ -34,7 +34,6 @@ export class EjsTemplateEngine implements TemplateEngine {
   ): void {
     const filepath = this.render(to, options);
     outputFileSync(filepath, this.render(template, options));
-    this.print.success(filepath);
   }
 
   generateFromFile(

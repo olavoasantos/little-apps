@@ -11,8 +11,9 @@ export const args: Application.CliArgument[] = [];
 export const command: Micra.RouteHandler = async ({use, options}) => {
   const path = use('path');
   const print = use('print');
-  const Directory = use('directory');
-  const File = use('file');
+  const Directory = use('Directory');
+  const File = use('File');
+  const Template = use('Template');
   const templateEngine = use('template-engine');
   const types = ['apps', 'packages'];
 
@@ -90,23 +91,21 @@ export const command: Micra.RouteHandler = async ({use, options}) => {
         message: 'What name should we use?',
       });
 
-  const template = File.find(path.templates('misc/factory.ts'));
+  const template = Template.find(path.templates('misc/factory.ts'));
   const ctx = {name, project, moduleName: mod};
-  const newClass = new File({
-    path: templateEngine.render(
-      path.cwd(
-        type,
-        project,
-        mod === 'app' || type === 'packages' ? '' : 'core',
-        mod,
-        'testing/factories',
-        name + 'Factory' + template.extension,
-      ),
-      ctx,
+  const destination = templateEngine.render(
+    path.cwd(
+      type,
+      project,
+      mod === 'app' || type === 'packages' ? '' : 'core',
+      mod,
+      'testing',
+      'factories',
+      name + 'Factory' + template.extension,
     ),
-    content: templateEngine.render(template.content, ctx),
-  });
-  if (newClass.exists) {
+    ctx,
+  );
+  if (File.exists(destination)) {
     const response = await inquirer.prompt({
       type: 'confirm',
       name: 'force',
@@ -114,7 +113,7 @@ export const command: Micra.RouteHandler = async ({use, options}) => {
     });
 
     if (!response.force) {
-      return new Response();
+      return;
     }
   }
 
@@ -123,8 +122,8 @@ export const command: Micra.RouteHandler = async ({use, options}) => {
     .info(`Creating the ${name} factory on the ${project}'s ${mod} module:`)
     .newLine();
 
-  newClass.save();
-  print.success(`Created:`, newClass.path);
+  template.save(destination, ctx);
+  print.success(`Created:`, destination);
 
   // Update index to export new file
   const exporter = File.find(
@@ -133,7 +132,8 @@ export const command: Micra.RouteHandler = async ({use, options}) => {
       project,
       mod === 'app' || type === 'packages' ? '' : 'core',
       mod,
-      'testing/index.ts',
+      'testing',
+      'index.ts',
     ),
   );
   const exportLine = `export * from './${join(

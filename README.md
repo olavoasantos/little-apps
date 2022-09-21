@@ -10,12 +10,12 @@ A collection of small apps.
 
 ### Apps
 
-- [cli](./apps/cli)
+* [cli](./apps/cli)
 
 ### Packages
 
-- [polyfills](./packages/polyfills)
-- [request-handler](./packages/request-handler)
+* [polyfills](./packages/polyfills)
+* [request-handler](./packages/request-handler)
 
 ## Developing
 

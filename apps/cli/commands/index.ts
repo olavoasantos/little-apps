@@ -1,50 +1,50 @@
-import * as SprintCloseCommand from './SprintClose';
-import * as MakeReadmeCommand from './MakeReadme';
-import * as MakeModuleCommand from './MakeModule';
-import * as MakeClassCommand from './MakeClass';
-import * as MakeTypeCommand from './MakeType';
-import * as MakeUtilityCommand from './MakeUtility';
-import * as MakeFactoryCommand from './MakeFactory';
-import * as MakeCommandCommand from './MakeCommand';
+import * as SprintClose from './SprintClose';
+import * as MakeReadme from './MakeReadme';
+import * as MakeModule from './MakeModule';
+import * as MakeClass from './MakeClass';
+import * as MakeType from './MakeType';
+import * as MakeUtility from './MakeUtility';
+import * as MakeFactory from './MakeFactory';
+import * as MakeCommand from './MakeCommand';
 
 export const router = use('router');
 
 router
-  .command('make\\:command', MakeCommandCommand.command)
-  .options(MakeCommandCommand.options)
-  .arguments(MakeCommandCommand.args);
+  .command('make\\:command', MakeCommand.command)
+  .options(MakeCommand.options)
+  .arguments(MakeCommand.args);
 
 router
-  .command('make\\:factory', MakeFactoryCommand.command)
-  .options(MakeFactoryCommand.options)
-  .arguments(MakeFactoryCommand.args);
+  .command('make\\:factory', MakeFactory.command)
+  .options(MakeFactory.options)
+  .arguments(MakeFactory.args);
 
 router
-  .command('make\\:utility', MakeUtilityCommand.command)
-  .options(MakeUtilityCommand.options)
-  .arguments(MakeUtilityCommand.args);
+  .command('make\\:utility', MakeUtility.command)
+  .options(MakeUtility.options)
+  .arguments(MakeUtility.args);
 
 router
-  .command('make\\:type', MakeTypeCommand.command)
-  .options(MakeTypeCommand.options)
-  .arguments(MakeTypeCommand.args);
+  .command('make\\:type', MakeType.command)
+  .options(MakeType.options)
+  .arguments(MakeType.args);
 
 router
-  .command('make\\:class', MakeClassCommand.command)
-  .options(MakeClassCommand.options)
-  .arguments(MakeClassCommand.args);
+  .command('make\\:class', MakeClass.command)
+  .options(MakeClass.options)
+  .arguments(MakeClass.args);
 
 router
-  .command('make\\:module', MakeModuleCommand.command)
-  .options(MakeModuleCommand.options)
-  .arguments(MakeModuleCommand.args);
+  .command('make\\:module', MakeModule.command)
+  .options(MakeModule.options)
+  .arguments(MakeModule.args);
 
 router
-  .command('make\\:readme', MakeReadmeCommand.command)
-  .options(MakeReadmeCommand.options)
-  .arguments(MakeReadmeCommand.args);
+  .command('make\\:readme', MakeReadme.command)
+  .options(MakeReadme.options)
+  .arguments(MakeReadme.args);
 
 router
-  .command('sprint\\:close', SprintCloseCommand.command)
-  .options(SprintCloseCommand.options)
-  .arguments(SprintCloseCommand.args);
+  .command('sprint\\:close', SprintClose.command)
+  .options(SprintClose.options)
+  .arguments(SprintClose.args);
