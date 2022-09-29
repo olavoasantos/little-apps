@@ -48,5 +48,5 @@ export const command: Micra.RouteHandler = async ({use}) => {
     }),
   );
 
-  await $`git add . && git commit -m "sprint: updated changelog and sprint config"`;
+  await $`git add . && git commit -m "chore: updated changelog and sprint config"`;
 };
